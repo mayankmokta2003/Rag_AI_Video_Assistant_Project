@@ -33,7 +33,7 @@ def extract_action_items(transcript:str)->str:
         "- Deadline (if mentioned, else write 'Not specified')\n\n"
         "Format as a numbered list. If none found say 'No action items found.'"
     )
-    chain.invoke(transcript)
+    return chain.invoke(transcript)
 
 
 def extract_key_decisions(transcript: str) -> str:
@@ -42,9 +42,7 @@ def extract_key_decisions(transcript: str) -> str:
         "extract all key decisions made. Format as a numbered list. "
         "If none found say 'No key decisions found.'"
     )
-    chain.invoke({
-        "text": transcript
-    })
+    return chain.invoke(transcript)
 
 
 def extract_questions(transcript: str) -> str:

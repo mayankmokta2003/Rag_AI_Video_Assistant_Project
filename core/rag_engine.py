@@ -13,7 +13,7 @@ def get_llm():
 
 
 
-def formal_docs(docs):
+def format_docs(docs):
     return "\n\n".join([doc.page_content for doc in docs])
 
 
@@ -45,7 +45,7 @@ def build_rag_chain(transcipt : str):
     
     rag_chain = (
         {
-            "context" : retriever | RunnableLambda(formal_docs),
+            "context" : retriever | RunnableLambda(format_docs),
             "question" : RunnablePassthrough()
         }
         | prompt | llm | StrOutputParser()
@@ -80,7 +80,7 @@ def load_rag_chain():
     
     rag_chain = (
         {
-            "context" : retriever | RunnableLambda(formal_docs),
+            "context" : retriever | RunnableLambda(format_docs),
             "question" : RunnablePassthrough()
         }
         | prompt | llm | StrOutputParser()
@@ -91,7 +91,7 @@ def load_rag_chain():
 
 
 def ask_question(rag_chain, question : str) -> str:
-    print("Question: {question}" )
+    print(f"Question: {question}")
     answer = rag_chain.invoke(question)
     print(f"Answer: {answer}")
     return answer

@@ -22,9 +22,9 @@ def summarize(transcript : str) -> list:
     llm = get_llm()
 
     map_prompt = ChatPromptTemplate.from_messages([
-        ("system", " Summarize the portion of the meeting transcript concisely")
-        ("human", "{text}")
-    ])
+    ("system", "Summarize the portion of the meeting transcript concisely"),
+    ("human", "{text}")
+])
 
     map_chain = map_prompt | llm | StrOutputParser()
 
@@ -39,7 +39,7 @@ def summarize(transcript : str) -> list:
             "system",
             "You are an expert meeting summarizer. Combine these partial summaries "
             "into one final professional meeting summary in bullet points.",
-        )
+        ),
         (
             "human",
             "{text}"
@@ -64,7 +64,7 @@ def generate_title(transcipt : str) -> str:
             "system",
             "Based on the meeting transcript, generate a short professional meeting title "
             "(max 8 words). Only return the title, nothing else.",
-        )
+        ),
         (
             "human",
             "{text}"

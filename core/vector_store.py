@@ -55,7 +55,7 @@ def load_vector_store() -> Chroma:
 
 
 def get_retriever(vector_store : Chroma, k : int = 4):
-    vector_store.as_retriever(
+    return vector_store.as_retriever(
         search_type = "mmr",
         search_kwargs={"k": k, "fetch_k": 50})
     
